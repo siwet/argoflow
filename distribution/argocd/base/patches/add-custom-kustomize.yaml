@@ -15,10 +15,11 @@ spec:
         image: alpine:3.8
         command: [sh, -c]
         args:
-          - >-
-            wget -qO-
-            https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.0.5/kustomize_v4.0.5_linux_amd64.tar.gz
-            | tar -xvzf - && mv kustomize /custom-tools/kustomize_4_0_5
+        - >-
+          apk add wget && export https_proxy=http://10.128.6.11:8118 && export
+          https_proxys=http://10.128.6.11:8118 && echo proxyok && wget
+          https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.0.5/kustomize_v4.0.5_linux_amd64.tar.gz
+          && tar -zxf *.tar.gz && mv kustomize /custom-tools/kustomize_4_0_5
         env:
           - name: http_proxy
             value: 'http://10.128.6.11:8118'
